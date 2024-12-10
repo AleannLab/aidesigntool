@@ -1,15 +1,14 @@
 "use client"
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardHeader, CardTitle, CardContent, CardSidebar} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ChevronRight, Wand2 } from 'lucide-react';
-import {useSession} from "next-auth/react";
 import axios from "axios";
 
 const LingerieDesigner = () => {
-    const categories = {
+    const categories: any = {
         bras: {
             attributes: [
                 {
@@ -148,17 +147,35 @@ const LingerieDesigner = () => {
         }
     };
 
-    const { data: session, status } = useSession()
 
     const [
         generatedImage, setGeneratedImage
     ] = useState();
 
 
-    const [selectedPath, setSelectedPath] = useState([]);
+    const [selectedPath, setSelectedPath] = useState<string[]>([]);
     const [selections, setSelections] = useState({});
     const [customPrompt, setCustomPrompt] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
+    const [
+        balance, setBalance
+    ] = useState<null | number>(null)
+
+    const fetchBalance = async () => {
+        const {data} = await axios.get('/api/balance');
+        setBalance(data.balance);
+    };
+
+    useEffect(() => {
+
+        fetchBalance();
+
+        const interval = setInterval(() => {
+            fetchBalance();
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const getCurrentOptions = () => {
         if (selectedPath.length === 0) {
@@ -173,12 +190,12 @@ const LingerieDesigner = () => {
         return [];
     };
 
-    const handleSelection = (option) => {
+    const handleSelection = (option: string) => {
         const newPath = [...selectedPath, option];
         setSelectedPath(newPath);
     };
 
-    const handleAttributeSelection = (attribute, value) => {
+    const handleAttributeSelection = (attribute: string, value: string) => {
         setSelections(prev => ({
             ...prev,
             [attribute]: value
@@ -195,9 +212,9 @@ const LingerieDesigner = () => {
                 selectedPath
             });
 
-            console.log(data);
 
             setGeneratedImage(data.generatedImage);
+            await fetchBalance();
 
 
         } catch (err) {
@@ -220,7 +237,9 @@ const LingerieDesigner = () => {
         <Card>
             <CardSidebar>
                 <CardHeader>
-                    <CardTitle>AI Lingerie Designer</CardTitle>
+                    <CardTitle>AI Lingerie Designer. {
+                        balance !== null ? `Balance: ${balance}` : ''
+                    }</CardTitle>
                     <div className="flex gap-2 text-sm text-gray-500">
                         {selectedPath.map((item, index) => (
                             <div key={index} className="flex items-center">
@@ -233,7 +252,7 @@ const LingerieDesigner = () => {
                 {selectedPath.length === 0 ? (
                     <div className="flex flex-wrap justify-center gap-4 px-[60px] py-[32px]">
                         {currentOptions.map((category) => (
-                            <div className="w-[130px] h-[130px]">
+                            <div key={category} className="w-[130px] h-[130px]">
                                 <Button
                                     key={category}
                                     variant="outline"
