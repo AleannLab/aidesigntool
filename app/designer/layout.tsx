@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import {getSession} from "@/auth";
+import {AuthProvider} from "@/app/providers";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,10 +16,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getSession()
+
+
   return (
       <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body >
+      <AuthProvider session={session}>
         {children}
+      </AuthProvider>
       </body>
       </html>
   )

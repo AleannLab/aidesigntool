@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import app from "@/app/app";
+import {Balances} from "@/models/balances";
 
 
 async function handler(request: Request) {
@@ -30,8 +31,11 @@ async function handler(request: Request) {
             );
         }
 
-        await app.db.insertInto("aidesigntool.users").values({ email: preparedEmail, password: hashedPassword }).execute();
+        const newUser = await app.db.insertInto("aidesigntool.users").values({ email: preparedEmail, password: hashedPassword })
+            .returningAll()
+            .executeTakeFirstOrThrow();
 
+        await Balances.add(newUser.id, 80);
 
         return NextResponse.json(
             { message: "User registered successfully" },

@@ -16,6 +16,12 @@ export interface AidesigntoolUsers {
   password: string | null;
 }
 
+export interface AidesigntoolUsersBalances {
+  balance: number;
+  user_id: number;
+}
+
 export interface DB {
   "aidesigntool.users": AidesigntoolUsers;
+  "aidesigntool.users_balances": AidesigntoolUsersBalances;
 }

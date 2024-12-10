@@ -154,7 +154,7 @@ const LingerieDesigner = () => {
         generatedImage, setGeneratedImage
     ] = useState();
 
-    console.log({session}, status)
+
     const [selectedPath, setSelectedPath] = useState([]);
     const [selections, setSelections] = useState({});
     const [customPrompt, setCustomPrompt] = useState('');
