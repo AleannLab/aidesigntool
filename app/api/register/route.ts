@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import app from "@/app/app";
 import {Balances} from "@/models/balances";
+import {Users} from "@/models/users";
 
 
 async function handler(request: Request) {
@@ -20,9 +21,7 @@ async function handler(request: Request) {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const preparedEmail = email.trim().toLowerCase()
-
-        const user = await app.db.selectFrom("aidesigntool.users").selectAll().where("email", "=", preparedEmail).executeTakeFirst();
+        const user = await Users.findOneByEmail(email)
 
         if (user) {
             return NextResponse.json(
@@ -30,6 +29,7 @@ async function handler(request: Request) {
                 { status: 400 }
             );
         }
+        const preparedEmail = email.trim().toLowerCase()
 
         const newUser = await app.db.insertInto("aidesigntool.users").values({ email: preparedEmail, password: hashedPassword })
             .returningAll()

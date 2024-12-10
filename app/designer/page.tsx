@@ -8,7 +8,10 @@ import { ChevronRight, Wand2 } from 'lucide-react';
 import axios from "axios";
 
 const LingerieDesigner = () => {
-    const categories: any = {
+    const categories: Record<string, Record<string, {
+        name: string;
+        options: string[];
+    }[]>> = {
         bras: {
             attributes: [
                 {
@@ -154,7 +157,7 @@ const LingerieDesigner = () => {
 
 
     const [selectedPath, setSelectedPath] = useState<string[]>([]);
-    const [selections, setSelections] = useState({});
+    const [selections, setSelections] = useState<Record<string, string>>({});
     const [customPrompt, setCustomPrompt] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
     const [
@@ -251,10 +254,9 @@ const LingerieDesigner = () => {
                 </CardHeader>
                 {selectedPath.length === 0 ? (
                     <div className="flex flex-wrap justify-center gap-4 px-[60px] py-[32px]">
-                        {currentOptions.map((category) => (
-                            <div key={category} className="w-[130px] h-[130px]">
+                        {(currentOptions as string[]).map((category, idx) => (
+                            <div key={idx} className="w-[130px] h-[130px]">
                                 <Button
-                                    key={category}
                                     variant="outline"
                                     className="h-24 capitalize"
                                     onClick={() => handleSelection(category)}
@@ -266,7 +268,10 @@ const LingerieDesigner = () => {
                     </div>
                 ) : isAttributeSelection ? (
                     <div className="space-y-6">
-                        {currentOptions.map((attribute) => (
+                        {(currentOptions as {
+                            name: string;
+                            options: string[];
+                        }[]).map((attribute) => (
                             <div key={attribute.name} className="space-y-2">
                                 <h3 className="font-medium">{attribute.name}</h3>
                                 <div className="flex flex-wrap gap-2">
@@ -312,7 +317,7 @@ const LingerieDesigner = () => {
                     </div>
                 ) : (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {currentOptions.map((option) => (
+                        {(currentOptions as string[]).map((option) => (
                             <Button
                                 key={option}
                                 variant="outline"

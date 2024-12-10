@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {Balances} from "@/models/balances";
 import {getSession} from "@/auth";
-import app from "@/app/app";
+import {Users} from "@/models/users";
 
 
 async function handler(request: Request) {
@@ -19,9 +19,7 @@ async function handler(request: Request) {
     }
     try {
 
-        const user = await app.db.selectFrom("aidesigntool.users").selectAll().where("email", "=", session!.user!.email!)
-            .selectAll()
-            .executeTakeFirstOrThrow();
+        const user = await Users.current()
 
 
         const balance = await Balances.findOneByUserId(user.id);

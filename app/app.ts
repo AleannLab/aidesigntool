@@ -1,4 +1,3 @@
-import { Config } from "./config"
 import * as DB from "@/db"
 
 export class Application {
@@ -15,8 +14,6 @@ export class Application {
 
         return app
     }
-
-
 
 }
 

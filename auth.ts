@@ -1,7 +1,7 @@
 import { AuthOptions, getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import app from "@/app/app";
+import {Users} from "@/models/users";
 
 
 const authOptions: AuthOptions = {
@@ -14,6 +14,8 @@ const authOptions: AuthOptions = {
                 email: { label: "Email", type: "email", placeholder: "your-email@example.com" },
                 password: { label: "Password", type: "password" },
             },
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             async authorize(credentials) {
                 const { email, password } = credentials ?? {};
 
@@ -23,9 +25,8 @@ const authOptions: AuthOptions = {
 
                 try {
 
-                    const preparedEmail = email.trim().toLowerCase()
 
-                    const user = await app.db.selectFrom("aidesigntool.users").selectAll().where("email", "=", preparedEmail).executeTakeFirst();
+                    const user = await Users.findOneByEmail(email)
 
 
                     if (!user) {

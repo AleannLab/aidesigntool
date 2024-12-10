@@ -18,8 +18,9 @@ const AuthForm = () => {
                 await axios.post("/api/register", { email, password });
                 alert("Registration successful! You can now log in.");
                 setIsRegistering(false);
-            } catch (error: any) {
-                setError(error.response?.data?.message || "Registration failed");
+            } catch (error) {
+                console.log(error);
+                setError("Registration failed");
             }
         } else {
             const result = await signIn("credentials", {
