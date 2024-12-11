@@ -1,12 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-import {
+import { DB as BaseDB } from "./db";
 
-  DB as BaseDB,
-
-} from "./db"
-
-
-export interface DB extends BaseDB {
-
-}
+export interface DB extends BaseDB {}
