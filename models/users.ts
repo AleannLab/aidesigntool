@@ -9,7 +9,13 @@ export const Users = {
       throw new Error("No session provided");
     }
 
-    return Users.findOneByEmail(session!.user!.email!);
+    const user = await Users.findOneByEmail(session!.user!.email!);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
   },
   findOneByEmail: async (email: string) => {
     const preparedEmail = email.trim().toLowerCase();
@@ -18,7 +24,7 @@ export const Users = {
       .selectFrom("aidesigntool.users")
       .selectAll()
       .where("email", "=", preparedEmail)
-      .executeTakeFirstOrThrow();
+      .executeTakeFirst();
 
     return user;
   },

@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardContent,
   CardSidebar,
-} from "@/components/ui/card";
+} from "./components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronRight, Wand2 } from "lucide-react";
@@ -101,7 +101,7 @@ const LingerieDesigner = () => {
               {balance !== null ? `${balance} credits` : "Loading..."}
             </div>
             <Button
-              onClick={() => router.push("/plans")}
+              onClick={() => router.push("/pricing")}
               variant="filled"
               className="rounded-none"
             >
@@ -109,6 +109,7 @@ const LingerieDesigner = () => {
             </Button>
           </div>
         </CardHeader>
+        <div></div>
 
         <div className="flex gap-2 text-sm text-gray-500 px-[16px]">
           {selectedPath.map((item, index) => (
@@ -153,49 +154,57 @@ const LingerieDesigner = () => {
             ))}
           </div>
         ) : isAttributeSelection ? (
-          <div className="space-y-6 px-[16px]">
-            {(
-              currentOptions as {
-                name: string;
-                options: string[];
-              }[]
-            ).map((attribute) => (
-              <div key={attribute.name} className="space-y-2">
-                <h3 className="font-semibold">{attribute.name}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {attribute.options.map((option) => (
-                    <Button
-                      key={option}
-                      size="sm"
-                      variant={
-                        selections[attribute.name] === option
-                          ? "default"
-                          : "soft"
-                      }
-                      onClick={() =>
-                        handleAttributeSelection(attribute.name, option)
-                      }
-                      className="text-sm"
-                    >
-                      {option}
-                    </Button>
-                  ))}
+          <div
+            className="space-y-6 px-[16px] grid"
+            style={{
+              gridTemplateRows: "1fr auto",
+              maxHeight: "calc(100vh - 122px)",
+            }}
+          >
+            <div className="flex gap-4 flex-col overflow-auto">
+              {(
+                currentOptions as {
+                  name: string;
+                  options: string[];
+                }[]
+              ).map((attribute) => (
+                <div key={attribute.name} className="space-y-2">
+                  <h3 className="font-semibold">{attribute.name}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {attribute.options.map((option) => (
+                      <Button
+                        key={option}
+                        size="sm"
+                        variant={
+                          selections[attribute.name] === option
+                            ? "default"
+                            : "ghost"
+                        }
+                        onClick={() =>
+                          handleAttributeSelection(attribute.name, option)
+                        }
+                        className="text-sm"
+                      >
+                        {option}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
+              ))}
+              <div className="space-y-2">
+                <h3 className="font-semibold">Custom Details</h3>
+                <Textarea
+                  placeholder="Add any additional details or preferences..."
+                  value={customPrompt}
+                  onChange={(e) => setCustomPrompt(e.target.value)}
+                  className="h-24"
+                />
               </div>
-            ))}
-            <div className="space-y-2">
-              <h3 className="font-semibold">Custom Details</h3>
-              <Textarea
-                placeholder="Add any additional details or preferences..."
-                value={customPrompt}
-                onChange={(e) => setCustomPrompt(e.target.value)}
-                className="h-24"
-              />
             </div>
             <div className="flex gap-4 py-[8px]">
               <Button
                 onClick={handleReset}
-                variant="soft"
+                variant="ghost"
                 className="h-[56px] px-[16px]"
               >
                 Reset
@@ -232,11 +241,15 @@ const LingerieDesigner = () => {
             <span className="font-semibold text-[24px] text-center">
               You design is ready
             </span>
-            <img src={generatedImage} alt="demo" className="px-[12px]" />
+            <img
+              src={generatedImage}
+              alt="demo"
+              className="px-[12px] max-h-[65vh]"
+            />
             <Button
               variant="filled"
               className="w-full h-[56px]"
-              onClick={() => router.push("/plans")}
+              onClick={() => router.push("/pricing")}
             >
               HD Download
             </Button>

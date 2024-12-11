@@ -12,6 +12,10 @@ async function handler() {
   try {
     const user = await Users.findOneByEmail(session!.user!.email!);
 
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
     const balance = await Balances.findOneByUserId(user.id);
 
     return NextResponse.json(
