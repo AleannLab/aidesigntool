@@ -32,10 +32,15 @@ const Payment = () => {
     );
   }
 
+  const formattedPrice = new Intl.NumberFormat("en-EN", {
+    style: "currency",
+    currency: "USD",
+  }).format(selectedPlan.price);
+
   const productData = {
     title: `${selectedPlan.tokens / ONE_GENERATION_COST} AI Image Generation credit`,
     name: `${selectedPlan.tokens / ONE_GENERATION_COST} AI Image Generation credit (${selectedPlan.tokens} tokens)`,
-    price: `$${selectedPlan.price}.00`,
+    price: formattedPrice,
     paymentType: "One time payment - no recurring charge",
   };
 
