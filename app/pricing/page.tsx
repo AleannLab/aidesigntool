@@ -11,36 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { useRouter } from "next/navigation";
-
-const pricingPlans = [
-  {
-    tokens: 30,
-    price: 29.95,
-    features: [
-      "Create 100 designs",
-      "Generate HD quality images",
-      "Download your design",
-    ],
-  },
-  {
-    tokens: 250,
-    price: 84.0,
-    features: [
-      "Create 100 designs",
-      "Generate HD quality images",
-      "Download your design",
-    ],
-  },
-  {
-    tokens: 400,
-    price: 99.0,
-    features: [
-      "Create 100 designs",
-      "Generate HD quality images",
-      "Download your design",
-    ],
-  },
-];
+import { pricingPlans } from "@/app/pricing-plans";
 
 const faqItems = [
   {
@@ -74,7 +45,7 @@ const Pricing = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center gap-14 pt-10 pb-0 px-0 relative bg-white">
+    <div className="flex flex-col items-center gap-14 pt-10 pb-10 px-0 relative bg-white">
       <Button
         onClick={() => router.back()}
         variant="ghost"
@@ -95,7 +66,7 @@ const Pricing = () => {
         </p>
       </div>
 
-      <div className="flex items-start gap-4 z-[2]">
+      <div className="flex items-start gap-4 z-[2] flex-wrap justify-around">
         {pricingPlans.map((plan, index) => (
           <Card key={index} className="w-[300px]">
             <CardContent className="pt-6">
@@ -114,7 +85,10 @@ const Pricing = () => {
               </ul>
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
-              <Button className="w-full bg-collection-1-primary hover:bg-collection-1-primary/90">
+              <Button
+                onClick={() => router.push(`/checkout/${plan.id}`)}
+                className="w-full bg-collection-1-primary hover:bg-collection-1-primary/90"
+              >
                 Purchase
               </Button>
               <p className="text-sm text-collection-1-lighttext">

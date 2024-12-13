@@ -1,6 +1,7 @@
 export const icons: Record<string, React.ReactNode> = {
   bras: (
     <svg
+      className="!w-[64px] !h-[65px]"
       width="64"
       height="65"
       viewBox="0 0 64 65"
@@ -67,6 +68,7 @@ export const icons: Record<string, React.ReactNode> = {
   ),
   panties: (
     <svg
+      className="!w-[64px] !h-[65px]"
       width="64"
       height="65"
       viewBox="0 0 64 65"
@@ -91,6 +93,7 @@ export const icons: Record<string, React.ReactNode> = {
   ),
   bodysuits: (
     <svg
+      className="!w-[64px] !h-[65px]"
       width="64"
       height="65"
       viewBox="0 0 64 65"
@@ -129,6 +132,7 @@ export const icons: Record<string, React.ReactNode> = {
   ),
   sleepwear: (
     <svg
+      className="!w-[64px] !h-[65px]"
       width="64"
       height="65"
       viewBox="0 0 64 65"
@@ -174,6 +178,7 @@ export const icons: Record<string, React.ReactNode> = {
   ),
   hosiery: (
     <svg
+      className="!w-[30px] !h-[57px]"
       width="30"
       height="57"
       viewBox="0 0 30 57"

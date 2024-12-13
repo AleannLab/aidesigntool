@@ -12,12 +12,12 @@ const footerLinks = [
 const Footer = () => {
   const pathname = usePathname();
 
-  if (["/auth", "/designer"].includes(pathname)) {
+  if (["/auth", "/designer", "/account"].includes(pathname)) {
     return null;
   }
 
   return (
-    <footer className="flex flex-col items-center gap-8 py-8 w-full bg-[#db27771a]">
+    <footer className="h-[250px] flex flex-col items-center gap-8 py-8 w-full bg-[#db27771a]">
       <Logo />
       <nav className="flex items-center gap-8">
         {footerLinks.map((link, index) => (

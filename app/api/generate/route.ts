@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Balances } from "@/models/balances";
 import { getSession } from "@/auth";
 import { Users } from "@/models/users";
+import { ONE_GENERATION_COST } from "@/app/consts";
 
 async function handler(request: Request) {
   const body = await request.json();
@@ -18,7 +19,7 @@ async function handler(request: Request) {
     const user = await Users.current();
 
     const balance = await Balances.findOneByUserId(user.id);
-    const toSpend = 10;
+    const toSpend = ONE_GENERATION_COST;
 
     if (!balance || balance < toSpend) {
       return NextResponse.json(

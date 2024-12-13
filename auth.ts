@@ -5,6 +5,7 @@ import { Users } from "@/models/users";
 
 const authOptions: AuthOptions = {
   secret: "123",
+
   providers: [
     CredentialsProvider({
       name: "Email and Password",
@@ -46,6 +47,13 @@ const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // todo is does not work
+      console.log(url, baseUrl);
+      return url.startsWith(baseUrl) ? url : `${baseUrl}/designer`;
+    },
+  },
   session: {
     strategy: "jwt",
   },
