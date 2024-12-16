@@ -1,8 +1,6 @@
 "use client";
 
-"use client";
-
-import React from "react";
+import React, { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,6 +22,14 @@ const Account = () => {
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("state") === "sign-up") {
+      setIsRegistering(true);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,8 +58,6 @@ const Account = () => {
 
       if (result?.error) {
         setError(result.error);
-      } else {
-        window.location.href = "/";
       }
     }
   };

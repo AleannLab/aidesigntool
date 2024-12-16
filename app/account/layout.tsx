@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getSession } from "@/auth";
-import { AuthProvider } from "@/app/providers";
+import { GatedPage } from "@/app/providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +15,8 @@ export default async function RootLayout({
   const session = await getSession();
 
   return (
-    <AuthProvider session={session}>
+    <GatedPage session={session}>
       <div className="-mx-4 sm:-mx-6 lg:-mx-8">{children}</div>
-    </AuthProvider>
+    </GatedPage>
   );
 }

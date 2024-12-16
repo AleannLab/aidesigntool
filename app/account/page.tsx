@@ -25,7 +25,7 @@ const Account = () => {
     <div className="flex min-h-screen bg-white">
       <Card className="w-[444px] border-0 rounded-none">
         <CardContent className="h-full flex flex-col p-6">
-          <header className="flex items-center justify-between mb-8 pt-2">
+          <div className="flex items-center justify-between mb-8 pt-2">
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10">
                 <AvatarFallback>
@@ -48,7 +48,7 @@ const Account = () => {
                 Add
               </Button>
             </div>
-          </header>
+          </div>
 
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-4">

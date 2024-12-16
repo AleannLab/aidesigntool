@@ -11,6 +11,16 @@ export function AuthProvider({
   session: Session | null;
   children: React.ReactNode;
 }) {
+  return <SessionProvider session={session}>{children}</SessionProvider>;
+}
+
+export function GatedPage({
+  session,
+  children,
+}: {
+  session: Session | null;
+  children: React.ReactNode;
+}) {
   const router = useRouter();
 
   if (!session) {
@@ -18,5 +28,5 @@ export function AuthProvider({
     return;
   }
 
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return <>{children}</>;
 }

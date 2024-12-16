@@ -51,7 +51,7 @@ const authOptions: AuthOptions = {
     async redirect({ url, baseUrl }) {
       // todo is does not work
       console.log(url, baseUrl);
-      return url.startsWith(baseUrl) ? url : `${baseUrl}/designer`;
+      return `${baseUrl}/designer`;
     },
   },
   session: {

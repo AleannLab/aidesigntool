@@ -5,10 +5,14 @@ import axios from "axios";
 import { useSession, signOut } from "next-auth/react";
 
 export const useUser = () => {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
   const [balance, setBalance] = useState<null | number>(null);
   const fetchBalance = async () => {
+    if (!session?.user) {
+      return null;
+    }
+
     const { data } = await axios.get("/api/balance");
     setBalance(data.balance);
   };
@@ -28,7 +32,7 @@ export const useUser = () => {
 
   return {
     balance,
-    email: data?.user?.email ?? "",
+    email: session?.user?.email ?? "",
     refetchBalance: fetchBalance,
     logout,
   };
