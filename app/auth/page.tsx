@@ -12,9 +12,9 @@ import { signIn } from "next-auth/react";
 import axios from "axios";
 
 const navigationLinks = [
-  { text: "Terms", href: "#" },
-  { text: "Privacy Policy", href: "#" },
-  { text: "Contact", href: "#" },
+  { text: "Terms", href: "/terms-and-conditions" },
+  { text: "Privacy Policy", href: "/privacy-policy" },
+  { text: "Contact", href: "mailto:support@dressy.app" },
 ];
 
 const Account = () => {

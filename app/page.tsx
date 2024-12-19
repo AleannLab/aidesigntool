@@ -1,176 +1,74 @@
 "use client";
+{/* eslint-disable @next/next/no-html-link-for-pages */}
 
-import Link from "next/link";
-import Head from "next/head";
-import React, { useEffect } from "react";
-import { useUser } from "@/app/hooks/useUser";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useRouter } from "next/navigation";
+import React from "react";
+import {AccountButton} from "@/components/ui/account-button";
+import {useScript} from "@/app/hooks/useScript";
 
 export default function Home() {
-  const user = useUser();
-  const router = useRouter();
 
-  useEffect(() => {
-    function injectScripts(src: string) {
-      const script = document.createElement("script");
-      script.src = src;
-      script.type = "text/javascript";
-      document.body.appendChild(script);
-    }
-
-    injectScripts("/js/webflow.js");
-
-    function fadeInImages() {
-      const images = document.querySelectorAll(".image-feature");
-
-      images.forEach((image, index) => {
-        setTimeout(() => {
-          if (image instanceof HTMLImageElement) {
-            image.style.transition = "opacity 1s ease";
-            image.style.opacity = "1";
-          }
-        }, index * 50);
-      });
-    }
-
-    fadeInImages();
-  }, []);
+  useScript()
 
   return (
     <>
-      <Head>
-        <link rel="stylesheet" href="/css/home.css" />
-      </Head>
-      {/*  Last Published: Sat Dec 14 2024 01:22:27 GMT+0000 (Coordinated Universal Time)  */}
-      {/*<meta charSet="utf-8" />*/}
-      {/*<title>*/}
-      {/*    AI Lingerie Design Tool | Create Custom Lingerie Designs Instantly*/}
-      {/*</title>*/}
-      {/*<meta*/}
-      {/*    content="Design custom lingerie pieces with our AI-powered tool. Create bras, sleepwear, bodysuits, and hosiery with professional-quality visualizations. No design experience needed."*/}
-      {/*    name="description"*/}
-      {/*/>*/}
-      {/*<meta*/}
-      {/*    content="Design Custom Lingerie with AI | Professional Visualizations in Seconds"*/}
-      {/*    property="og:title"*/}
-      {/*/>*/}
-      {/*<meta*/}
-      {/*    content="Design custom lingerie pieces with our AI-powered tool. Create bras, sleepwear, bodysuits, and hosiery with professional-quality visualizations. No design experience needed."*/}
-      {/*    property="og:description"*/}
-      {/*/>*/}
-      {/*<meta content="/og-image.jpg" property="og:image" />*/}
-      {/*<meta*/}
-      {/*    content="Design Custom Lingerie with AI | Professional Visualizations in Seconds"*/}
-      {/*    property="twitter:title"*/}
-      {/*/>*/}
-      {/*<meta*/}
-      {/*    content="Design custom lingerie pieces with our AI-powered tool. Create bras, sleepwear, bodysuits, and hosiery with professional-quality visualizations. No design experience needed."*/}
-      {/*    property="twitter:description"*/}
-      {/*/>*/}
-      {/*<meta content="/og-image.jpg" property="twitter:image" />*/}
-      {/*<meta property="og:type" content="website" />*/}
-      {/*<meta content="summary_large_image" name="twitter:card" />*/}
-      {/*<meta content="width=device-width, initial-scale=1" name="viewport" />*/}
-      {/*<link href="css/normalize.css" rel="stylesheet" type="text/css" />*/}
-      {/*<link href="css/webflow.css" rel="stylesheet" type="text/css" />*/}
-      {/*<link*/}
-      {/*    href="css/atelier-ai-81cfbc8d2a30aaff17751f602043.webflow.css"*/}
-      {/*    rel="stylesheet"*/}
-      {/*    type="text/css"*/}
-      {/*/>*/}
-      {/*<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />*/}
-      {/*<link href="images/webclip.jpg" rel="apple-touch-icon" />*/}
       <div
-        data-animation="default"
-        data-collapse="medium"
-        data-duration={600}
-        data-easing="ease-out-expo"
-        data-easing2="ease-out-expo"
-        role="banner"
-        className="navbar w-nav"
+          data-animation="default"
+          data-collapse="medium"
+          data-duration={600}
+          data-easing="ease-out-expo"
+          data-easing2="ease-out-expo"
+          role="banner"
+          className="navbar w-nav"
       >
         <div className="nav-block">
           <div className="nav">
-            <Link
-              href="/"
-              aria-current="page"
-              className="brand w-nav-brand w--current"
+            <a
+                href="/"
+                aria-current="page"
+                className="brand w-nav-brand w--current"
             >
               <img
-                src="images/Atelier-ai-logo-w2.svg"
-                loading="eager"
-                alt=""
-                className="logo"
+                  src="images/Atelier-ai-logo-w2.svg"
+                  loading="eager"
+                  alt=""
+                  className="logo"
               />
-            </Link>
+            </a>
             <nav role="navigation" className="nav-menu w-nav-menu">
-              <Link href="#" className="nav-link w-nav-link">
+              <a href="#Features" className="nav-link w-nav-link">
                 Features
-                <br />
-              </Link>
-              <Link href="/pricing" className="nav-link w-nav-link">
-                Pricing
-              </Link>
-              <Link href="#" className="nav-link w-nav-link">
-                Contact
-              </Link>
+                <br/>
+              </a>
+              <a href="#Help" className="nav-link w-nav-link">
+                Help
+              </a>
             </nav>
           </div>
-          <div className="nav">
-            {user?.email ? (
-              <Avatar
-                onClick={() => {
-                  router.push("/account");
-                }}
-                className="h-10 w-10"
-              >
-                <AvatarFallback>
-                  {user.email ? user.email[0].toUpperCase() : "M"}
-                </AvatarFallback>
-              </Avatar>
-            ) : (
-              <>
-                <Link
-                  href="/auth?state=log-in"
-                  className="nav-link-extra w-nav-link"
-                >
-                  Log in
-                </Link>
-                <div className="block-nav-button">
-                  <Link
-                    href="/auth?state=sign-up"
-                    className="nav-button w-button"
-                  >
-                    Sign up
-                  </Link>
-                  <div className="menu-button w-nav-button">
-                    <div className="menu-icon w-icon-nav-menu" />
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+          <AccountButton />
         </div>
       </div>
       <div className="overflow">
         <div
-          data-w-id="7a156164-9dec-ac90-a568-7aabe3bd2ab3"
-          className="section-hero"
+            data-w-id="7a156164-9dec-ac90-a568-7aabe3bd2ab3"
+            className="section-hero"
         >
           <div className="content">
             <div className="w-layout-grid grid-hero">
               <div className="block-hero">
-                <h1 className="heading-hero large">
+                <h1 className="heading-hero large" style={{
+                  opacity: 0,
+                }}>
                   Design Your Dream Lingerie with AI
                 </h1>
-                <p className="paragraph-hero max-w">
+                <p style={{
+                  opacity: 0,
+                }} className="paragraph-hero max-w">
                   Transform your intimate apparel ideas into stunning
                   visualizations in seconds. No design experience needed - just
                   select your preferences and watch as AI brings your vision to
                   life with professional-quality designs.
                 </p>
-                <Link
+                <a
                   style={{
                     WebkitTransform:
                       "translate3d(0, 16px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
@@ -186,7 +84,7 @@ export default function Home() {
                   className="button w-button"
                 >
                   Try our open beta
-                </Link>
+                </a>
               </div>
               <div
                 id="w-node-_3faee776-541d-8a2f-1798-8c606d3a3e51-2976202f"
@@ -205,7 +103,7 @@ export default function Home() {
           </div>
           <div className="blur-top" />
         </div>
-        <div className="section">
+        <div id="Features" className="section">
           <div className="content">
             <div className="block-heading">
               <h2 className="heading">Design Lingerie for Every Moment</h2>
@@ -333,18 +231,18 @@ export default function Home() {
               <h2 className="heading">Design Without Limits</h2>
               <h2 className="heading opacity">
                 No more scrolling through countless stores trying to find that
-                perfect piece - create exactly what you&#39;re looking for with
-                our AI designer, customizing every detail from fabric to
-                finishing touches.
+                perfect piece - create exactly what you&#39;re looking for with our
+                AI designer, customizing every detail from fabric to finishing
+                touches.
               </h2>
-              <Link href="/designer" className="button w-button">
+              <a href="/designer" className="button w-button">
                 Try now for free
-              </Link>
+              </a>
               <div className="blur-block" />
             </div>
           </div>
         </div>
-        <div className="section">
+        <div id="Help" className="section">
           <div className="content">
             <div className="block-heading">
               <h2 className="heading">Frequently Asked Questions</h2>
@@ -365,7 +263,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content">
+                <div className="accordion-content"
+                     style={{
+                       display: "none",
+                       height: 0
+                     }}
+                >
                   <p className="paragraph-accordion">
                     You can generate as many designs as your token balance
                     allows. Each design costs one token, and you can purchase
@@ -388,7 +291,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content">
+                <div className="accordion-content"
+                     style={{
+                       display: "none",
+                       height: 0
+                     }}
+                >
                   <p className="paragraph-accordion">
                     Yes, all designs generated through our platform come with
                     full commercial usage rights. You own the designs you create
@@ -411,7 +319,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content">
+                <div className="accordion-content"
+                     style={{
+                       display: "none",
+                       height: 0
+                     }}
+                >
                   <p className="paragraph-accordion">
                     When your credits run out, you can simply purchase more
                     tokens from your dashboard. There&#39;s no waiting period or
@@ -432,7 +345,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content">
+                <div className="accordion-content"
+                     style={{
+                       display: "none",
+                       height: 0
+                     }}
+                >
                   <p className="paragraph-accordion">
                     Our platform operates on a pay-as-you-go model with one-time
                     purchases rather than a subscription. You buy tokens when
@@ -455,7 +373,11 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content">
+                <div className="accordion-content"
+                     style={{
+                       display: "none",
+                       height: 0
+                     }}>
                   <p className="paragraph-accordion">
                     Our AI generates highly detailed, professional-quality
                     designs that provide a realistic representation of how the
@@ -485,7 +407,8 @@ export default function Home() {
                   Your personal lingerie design studio. Powered by AI, designed
                   by you.
                 </p>
-                <Link href="#" className="link-block w-inline-block">
+                <a href="mailto:support@dressy.app"
+                   className="link-block w-inline-block">
                   <img
                     src="images/icon_6.svg"
                     loading="eager"
@@ -493,22 +416,19 @@ export default function Home() {
                     className="icon-link"
                   />
                   <div className="text-link">support@dressy.app</div>
-                </Link>
+                </a>
               </div>
               <div
                 id="w-node-_91e6edfb-36c0-e5d4-48fb-589312d14fbb-12d14fb0"
                 className="block-footer"
               >
                 <div className="subtitle-footer">quick links</div>
-                <Link href="#" className="link-footer">
-                  Terms
-                </Link>
-                <Link href="/pricing" className="link-footer">
+                <a href="terms-and-conditions" className="link-footer">
+                  Terms and Conditions
+                </a>
+                <a href="privacy-policy" className="link-footer">
                   Privacy Policy
-                </Link>
-                <Link href="#" className="link-footer">
-                  Contact
-                </Link>
+                </a>
               </div>
             </div>
           </div>

@@ -17,13 +17,16 @@ export default async function RootLayout({
   const session = await getSession();
 
   return (
-    <html lang="en">
+    <html
+        data-wf-page="675a2c7fe83fa5ca2976202f"
+        data-wf-site="675a2c7fe83fa5ca29762030"
+        lang="en">
       <Head />
       <body>
-        <Main>
+      <Main>
           <AuthProvider session={session}>{children}</AuthProvider>
-        </Main>
-      </body>
+      </Main>
+       </body>
     </html>
   );
 }

@@ -1,8 +1,9 @@
-import Link from "next/link";
+
+{/* eslint-disable @next/next/no-html-link-for-pages */}
 
 export const Logo = () => {
   return (
-    <Link href="/">
+    <a href="/">
       <svg
         width="204"
         height="59"
@@ -63,6 +64,6 @@ export const Logo = () => {
           fill="#DB2777"
         />
       </svg>
-    </Link>
+    </a>
   );
 };

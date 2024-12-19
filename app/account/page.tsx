@@ -11,9 +11,9 @@ import { useUser } from "@/app/hooks/useUser";
 import { useRouter } from "next/navigation";
 
 const navigationLinks = [
-  { text: "Terms", href: "#" },
-  { text: "Privacy Policy", href: "#" },
-  { text: "Contact", href: "#" },
+  { text: "Terms", href: "/terms-and-conditions" },
+  { text: "Privacy Policy", href: "/privacy-policy" },
+  { text: "Contact", href: "mailto:support@dressy.app" },
 ];
 
 const Account = () => {

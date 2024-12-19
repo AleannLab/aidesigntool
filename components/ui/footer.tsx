@@ -4,9 +4,9 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 const footerLinks = [
-  { label: "Terms", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Terms", href: "/terms-and-conditions" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Contact", href: "mailto:support@dressy.app" },
 ];
 
 const Footer = () => {
