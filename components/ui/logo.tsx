@@ -1,5 +1,6 @@
-
-{/* eslint-disable @next/next/no-html-link-for-pages */}
+{
+  /* eslint-disable @next/next/no-html-link-for-pages */
+}
 
 export const Logo = () => {
   return (

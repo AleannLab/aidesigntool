@@ -1,43 +1,44 @@
 "use client";
-{/* eslint-disable @next/next/no-html-link-for-pages */}
+{
+  /* eslint-disable @next/next/no-html-link-for-pages */
+}
 
 import React from "react";
-import {AccountButton} from "@/components/ui/account-button";
-import {useScript} from "@/app/hooks/useScript";
+import { AccountButton } from "@/components/ui/account-button";
+import { useScript } from "@/app/hooks/useScript";
 
 export default function Home() {
-
-  useScript()
+  useScript();
 
   return (
     <>
       <div
-          data-animation="default"
-          data-collapse="medium"
-          data-duration={600}
-          data-easing="ease-out-expo"
-          data-easing2="ease-out-expo"
-          role="banner"
-          className="navbar w-nav"
+        data-animation="default"
+        data-collapse="medium"
+        data-duration={600}
+        data-easing="ease-out-expo"
+        data-easing2="ease-out-expo"
+        role="banner"
+        className="navbar w-nav"
       >
         <div className="nav-block">
           <div className="nav">
             <a
-                href="/"
-                aria-current="page"
-                className="brand w-nav-brand w--current"
+              href="/"
+              aria-current="page"
+              className="brand w-nav-brand w--current"
             >
               <img
-                  src="images/Atelier-ai-logo-w2.svg"
-                  loading="eager"
-                  alt=""
-                  className="logo"
+                src="images/Atelier-ai-logo-w2.svg"
+                loading="eager"
+                alt=""
+                className="logo"
               />
             </a>
             <nav role="navigation" className="nav-menu w-nav-menu">
               <a href="#Features" className="nav-link w-nav-link">
                 Features
-                <br/>
+                <br />
               </a>
               <a href="#Help" className="nav-link w-nav-link">
                 Help
@@ -49,20 +50,26 @@ export default function Home() {
       </div>
       <div className="overflow">
         <div
-            data-w-id="7a156164-9dec-ac90-a568-7aabe3bd2ab3"
-            className="section-hero"
+          data-w-id="7a156164-9dec-ac90-a568-7aabe3bd2ab3"
+          className="section-hero"
         >
           <div className="content">
             <div className="w-layout-grid grid-hero">
               <div className="block-hero">
-                <h1 className="heading-hero large" style={{
-                  opacity: 0,
-                }}>
+                <h1
+                  className="heading-hero large"
+                  style={{
+                    opacity: 0,
+                  }}
+                >
                   Design Your Dream Lingerie with AI
                 </h1>
-                <p style={{
-                  opacity: 0,
-                }} className="paragraph-hero max-w">
+                <p
+                  style={{
+                    opacity: 0,
+                  }}
+                  className="paragraph-hero max-w"
+                >
                   Transform your intimate apparel ideas into stunning
                   visualizations in seconds. No design experience needed - just
                   select your preferences and watch as AI brings your vision to
@@ -231,9 +238,9 @@ export default function Home() {
               <h2 className="heading">Design Without Limits</h2>
               <h2 className="heading opacity">
                 No more scrolling through countless stores trying to find that
-                perfect piece - create exactly what you&#39;re looking for with our
-                AI designer, customizing every detail from fabric to finishing
-                touches.
+                perfect piece - create exactly what you&#39;re looking for with
+                our AI designer, customizing every detail from fabric to
+                finishing touches.
               </h2>
               <a href="/designer" className="button w-button">
                 Try now for free
@@ -263,11 +270,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content"
-                     style={{
-                       display: "none",
-                       height: 0
-                     }}
+                <div
+                  className="accordion-content"
+                  style={{
+                    display: "none",
+                    height: 0,
+                  }}
                 >
                   <p className="paragraph-accordion">
                     You can generate as many designs as your token balance
@@ -291,11 +299,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content"
-                     style={{
-                       display: "none",
-                       height: 0
-                     }}
+                <div
+                  className="accordion-content"
+                  style={{
+                    display: "none",
+                    height: 0,
+                  }}
                 >
                   <p className="paragraph-accordion">
                     Yes, all designs generated through our platform come with
@@ -319,11 +328,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content"
-                     style={{
-                       display: "none",
-                       height: 0
-                     }}
+                <div
+                  className="accordion-content"
+                  style={{
+                    display: "none",
+                    height: 0,
+                  }}
                 >
                   <p className="paragraph-accordion">
                     When your credits run out, you can simply purchase more
@@ -345,11 +355,12 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content"
-                     style={{
-                       display: "none",
-                       height: 0
-                     }}
+                <div
+                  className="accordion-content"
+                  style={{
+                    display: "none",
+                    height: 0,
+                  }}
                 >
                   <p className="paragraph-accordion">
                     Our platform operates on a pay-as-you-go model with one-time
@@ -373,11 +384,13 @@ export default function Home() {
                     className="icon-accordion"
                   />
                 </div>
-                <div className="accordion-content"
-                     style={{
-                       display: "none",
-                       height: 0
-                     }}>
+                <div
+                  className="accordion-content"
+                  style={{
+                    display: "none",
+                    height: 0,
+                  }}
+                >
                   <p className="paragraph-accordion">
                     Our AI generates highly detailed, professional-quality
                     designs that provide a realistic representation of how the
@@ -407,8 +420,10 @@ export default function Home() {
                   Your personal lingerie design studio. Powered by AI, designed
                   by you.
                 </p>
-                <a href="mailto:support@dressy.app"
-                   className="link-block w-inline-block">
+                <a
+                  href="mailto:support@dressy.app"
+                  className="link-block w-inline-block"
+                >
                   <img
                     src="images/icon_6.svg"
                     loading="eager"

@@ -18,15 +18,16 @@ export default async function RootLayout({
 
   return (
     <html
-        data-wf-page="675a2c7fe83fa5ca2976202f"
-        data-wf-site="675a2c7fe83fa5ca29762030"
-        lang="en">
+      data-wf-page="675a2c7fe83fa5ca2976202f"
+      data-wf-site="675a2c7fe83fa5ca29762030"
+      lang="en"
+    >
       <Head />
       <body>
-      <Main>
+        <Main>
           <AuthProvider session={session}>{children}</AuthProvider>
-      </Main>
-       </body>
+        </Main>
+      </body>
     </html>
   );
 }
