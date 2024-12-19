@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
       >
         <div className="nav-block">
           <div className="nav">
-            <a href="index.html" className="brand w-nav-brand">
+            <a href="/" className="brand w-nav-brand">
               <img
                 src="images/Atelier-ai-logo-w2.svg"
                 loading="eager"
