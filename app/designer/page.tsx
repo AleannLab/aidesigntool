@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronRight, Wand2 } from "lucide-react";
 import axios from "axios";
 import { categories, icons } from "@/app/designer/categories";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/app/hooks/useUser";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 const LingerieDesigner = () => {
   const [generatedImage, setGeneratedImage] = useState();
+  const [error, setError] = useState<string | null>(null);
 
   const [selectedPath, setSelectedPath] = useState<string[]>([]);
   const [selections, setSelections] = useState<Record<string, string>>({});
@@ -21,6 +22,57 @@ const LingerieDesigner = () => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  console.log(searchParams);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const id = params.get("id");
+
+    if (id) {
+      const fetch = async () => {
+        try {
+          setIsGenerating(true);
+
+          const { data } = await axios.get(`/api/generate?id=${id}`);
+
+          if (data.generatedImage) {
+            setGeneratedImage(data.generatedImage);
+            setIsGenerating(false);
+            return;
+          }
+
+          if (data.error) {
+            if (data.error === "timed_out") {
+              await new Promise((resolve) => setTimeout(resolve, 2000));
+              return fetch();
+            }
+            setError(data.error);
+          }
+          setIsGenerating(false);
+          return;
+        } catch (err) {
+          setError((err as Error).message);
+          setIsGenerating(false);
+        }
+      };
+
+      fetch();
+    }
+  }, [searchParams]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   const { balance, email, refetchBalance } = useUser();
 
@@ -58,10 +110,24 @@ const LingerieDesigner = () => {
         selectedPath,
       });
 
-      setGeneratedImage(data.generatedImage);
+      if (!data.id) {
+        setError("An error occurred");
+        return;
+      }
+
+      // searchParams.append("id", data.id);
+      router.push(pathname + "?" + createQueryString("id", data.id));
+
+      // setGeneratedImage(data.generatedImage);
+
+      if (data.error) {
+        setError(data.error);
+      }
+
       await refetchBalance();
     } catch (err) {
       console.error(err);
+      setError("An error occurred");
     }
     setIsGenerating(false);
   };
@@ -234,7 +300,7 @@ const LingerieDesigner = () => {
         </CardContent>
       </Card>
 
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex-col flex items-center justify-center gap-4">
         {generatedImage ? (
           <div className="flex flex-col justify-center gap-[24px]">
             <span className="font-semibold text-[24px] text-center">
@@ -252,10 +318,36 @@ const LingerieDesigner = () => {
               HD Download
             </Button>
           </div>
+        ) : isGenerating ? (
+          <svg
+            className="animate-spin -ml-1 mr-3 h-12 w-12 text-primary"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
         ) : (
           <p className="text-2xl text-gray-400 font-semibold">
             Use the design panel to start
           </p>
+        )}
+        {error && (
+          <div className="flex justify-center">
+            <Badge variant="destructive">{error}</Badge>
+          </div>
         )}
       </div>
     </div>

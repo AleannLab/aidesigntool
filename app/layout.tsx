@@ -7,6 +7,7 @@ import { getSession } from "@/auth";
 export const metadata: Metadata = {
   title: "AI Lingerie Design Tool | Create Custom Lingerie Designs Instantly",
   description: "",
+  icons: "images/favicon.ico",
 };
 
 export default async function RootLayout({
