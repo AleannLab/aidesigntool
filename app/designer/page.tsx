@@ -110,13 +110,7 @@ const LingerieDesigner = () => {
         selectedPath,
       });
 
-      if (!data.id) {
-        setError("An error occurred");
-        return;
-      }
-
       // searchParams.append("id", data.id);
-      router.push(pathname + "?" + createQueryString("id", data.id));
 
       // setGeneratedImage(data.generatedImage);
 
@@ -124,12 +118,17 @@ const LingerieDesigner = () => {
         setError(data.error);
       }
 
+      if (!data.id) {
+        setError("An error occurred");
+        return;
+      }
+      router.push(pathname + "?" + createQueryString("id", data.id));
+
       await refetchBalance();
     } catch (err) {
       console.error(err);
       setError("An error occurred");
     }
-    setIsGenerating(false);
   };
 
   const handleReset = () => {
