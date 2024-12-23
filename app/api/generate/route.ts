@@ -212,7 +212,7 @@ async function generateCustomImageAstria(
 
 const fetchPromptImages = async (
   promptRequestId: string,
-  imageGenerationTimeout = 240,
+  imageGenerationTimeout = 10,
 ) => {
   try {
     let genCycles = 1;
