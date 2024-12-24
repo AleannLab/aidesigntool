@@ -12,7 +12,15 @@ export const Main = (props: PropsWithChildren) => {
   return (
     <>
       <main
-        className={cn(`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`, {})}
+        className={cn(``, {
+          ["max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"]: [
+            "/auth",
+            "/account",
+            "/designer",
+            "/pricing",
+            "/checkout",
+          ].some((path) => pathname.startsWith(path)),
+        })}
         style={{ minHeight: "calc(100vh - 250px)" }}
       >
         {props.children}
