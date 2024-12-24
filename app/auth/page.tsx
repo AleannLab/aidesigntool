@@ -101,7 +101,11 @@ const Account = () => {
             </Button>
 
             <div className="flex items-center justify-center gap-2">
-              <span className="text-sm">Don&#39;t have an account?</span>
+              <span className="text-sm">
+                {isRegistering
+                  ? "Already have an account?"
+                  : "Don't have an account?"}
+              </span>
               <Button
                 variant="link"
                 onClick={() => setIsRegistering(!isRegistering)}

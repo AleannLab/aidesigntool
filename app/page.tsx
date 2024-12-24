@@ -87,7 +87,7 @@ export default function Home() {
                       "translate3d(0, 16px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)",
                     opacity: 0,
                   }}
-                  href="/pricing"
+                  href="/designer"
                   className="button w-button"
                 >
                   Try our open beta
@@ -439,10 +439,10 @@ export default function Home() {
                 className="block-footer"
               >
                 <div className="subtitle-footer">quick links</div>
-                <a href="terms-and-conditions" className="link-footer">
+                <a href="/terms-and-conditions" className="link-footer">
                   Terms and Conditions
                 </a>
-                <a href="privacy-policy" className="link-footer">
+                <a href="/privacy-policy" className="link-footer">
                   Privacy Policy
                 </a>
               </div>
