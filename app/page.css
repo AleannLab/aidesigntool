@@ -6353,10 +6353,10 @@ figcaption {
     right: 0.7em;
   }
 
-  .nav-link-extra,
-  .nav-button {
-    display: none;
-  }
+  /*.nav-link-extra,*/
+  /*.nav-button {*/
+  /*  display: none;*/
+  /*}*/
 
   .section-hero {
     padding-top: 9em;

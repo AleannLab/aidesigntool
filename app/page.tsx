@@ -102,6 +102,7 @@ export default function Home() {
                     src="images/webpeditor_0253d39ced8d47b082864eb85e783f2e-removebg_wi17n2.webp"
                     loading="lazy"
                     alt=""
+                    className="h-full mt-12 sm:mt-0"
                   />
                 </div>
                 <div style={{ opacity: 0 }} className="blur-hero" />
@@ -196,7 +197,7 @@ export default function Home() {
                       style={{ opacity: 0 }}
                       alt=""
                       data-w-id="4f33f29c-2ef1-5436-81c6-a99f21ffcf2a"
-                      className="image-feature"
+                      className="image-feature mt-4 sm:mt-0"
                     />
                   </div>
                 </div>
@@ -216,7 +217,7 @@ export default function Home() {
                       style={{ opacity: 0 }}
                       alt=""
                       data-w-id="955a1bea-0db9-358b-b5e9-1c0fae8cf9de"
-                      className="image-feature"
+                      className="image-feature mb-4 sm:mb-0"
                     />
                     <div className="block-feature">
                       <h4 className="heading-feature">Timeless Essentials</h4>

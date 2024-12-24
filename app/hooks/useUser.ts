@@ -27,7 +27,10 @@ export const useUser = () => {
   }, []);
 
   const logout = async () => {
-    await signOut();
+    await signOut({
+      redirect: true,
+      callbackUrl: "/",
+    });
   };
 
   return {

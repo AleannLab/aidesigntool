@@ -141,8 +141,8 @@ const LingerieDesigner = () => {
   const isAttributeSelection = selectedPath.length === 1;
 
   return (
-    <div className="flex min-h-screen bg-white">
-      <Card className="w-[444px] border-0 rounded-none">
+    <div className="flex min-h-screen bg-white flex-col sm:flex-row">
+      <Card className="max-w-[444px] border-0 rounded-none">
         <CardContent className="h-full flex flex-col p-6">
           <header className="flex items-center justify-between mb-8 pt-2">
             <div className="flex items-center gap-3">

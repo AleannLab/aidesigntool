@@ -4199,7 +4199,8 @@ figcaption {
 
   .nav-link-extra,
   .nav-button {
-    display: none;
+    /*font-size: 11px;*/
+    white-space: nowrap;
   }
 
   .section-hero {
